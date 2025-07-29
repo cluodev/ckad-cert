@@ -72,6 +72,9 @@ kubectl describe pod mypod
 # View events
 kubectl get events --sort-by='.metadata.creationTimestamp'
 
+# view pod's ip addresses 
+kubectl get pods -l app=foo -o wide
+
 # View resource usage
 kubectl top pod
 kubectl top node
@@ -132,15 +135,20 @@ kubectl apply -f policy.yaml
 
 # Test service reachability
 kubectl exec testpod -- curl http://myapp:80
+# or create a temporary pod to run commands e.g. wget
+kubectl run busybox --image=busybox --restart=Never -it --rm -- wget -O- <POD_IP>:8080
+
 ```
 
 ---
 
-### 💡 General Tips:
-- Use `--dry-run=client -o yaml` to generate YAML without applying
+## 💡 General Tips
+
+- Use `--dry-run=client -o yaml` to generate YAML without applying, available for `run` and `create` command groups
 - Use `kubectl explain` to explore object schema
 - Use `kubectl get all` for overview
 - Add `-n <namespace>` when working in specific namespaces
+- Use `kubectl config set-context [NAME | --current] [--namespace=namespace] [--cluster=clustername]` when working in specific context e.g. k config set-context minikube --namespace=ckad
 
 ### Resource shortnames
 
@@ -186,4 +194,26 @@ networkpolicies netpol
 
 storageclasses sc
 
+helmcharts hc
 
+helmreleases hr
+
+### Useful Commands
+
+#### Curl
+
+```
+curl -X GET https://graph.microsoft.com/v1.0/me \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Accept: application/json"
+```
+
+```
+# debug response headers
+curl -i -X GET https://api.example.com/resource
+```
+
+```
+# only show status code
+curl -s -o /dev/null -w "%{http_code}\n" https://api.example.com/health
+```
