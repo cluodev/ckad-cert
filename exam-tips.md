@@ -58,3 +58,11 @@ e.g. Containers, Workloads (pods, ), Services, Load balancing, Networking, etc
 
 CKAD exercises: https://github.com/dgkanatsios/CKAD-exercises
 
+Important instructions: CKA and CKAD: https://docs.linuxfoundation.org/tc-docs/certification/tips-cka-and-ckad
+
+Official CKAD Introduction page: https://www.cncf.io/training/certification/ckad/
+
+Using Google NotebookLM
+
+
+
